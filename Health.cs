@@ -23,7 +23,7 @@ public class Health : MonoBehaviour
     /// <summary>
     /// Subtracts the current health by the given value
     /// </summary>
-    /// <param name="amount"></param>
+    /// <param name="amount">The int value that is used to subtract from the current health of the object</param>
     public void Damage(int amount)
     {
         CurrentHealth -= amount;
@@ -34,7 +34,10 @@ public class Health : MonoBehaviour
         }
         return;
     }
-
+    /// <summary>
+    /// Does addition to the current health by the given value
+    /// </summary>
+    /// <param name="amount">The int value that is used to added to the current health of the object</param>
     public void Heal(int amount)
     {
         if (CurrentHealth + amount > maxHealth)
