@@ -13,3 +13,5 @@ GetMaxHealth() *1
 # Features
 Documentation Comments
 ![Screenshot (8)](https://github.com/user-attachments/assets/10d53d93-a514-445c-bc55-5a2ae5af9dca)
+
+The Unity Event System is used to control what happens after the health has been decreased and or has reached 0
