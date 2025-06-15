@@ -2,12 +2,11 @@
 ![Screenshot (6)](https://github.com/user-attachments/assets/463c7be7-be2e-4bc5-90b7-572524c48325)
 
 # Function List
-`Damage(int amount)
+`Damage(int amount)`
 
-Heal(int amount)
+`Heal(int amount)`
 
-GetMaxHealth() *1`
-
+`GetMaxHealth()`
 *1 It's used to allow read access to the maxHealth variable while still allowing read/write access in the inspector
 
 # Features
