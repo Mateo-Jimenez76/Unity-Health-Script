@@ -7,7 +7,7 @@
 `Heal(int amount)`
 
 `GetMaxHealth()`
-*1 It's used to allow read access to the maxHealth variable while still allowing read/write access in the inspector
+It's used to allow read access to the maxHealth variable while still allowing read/write access in the inspector
 
 # Features
 Documentation Comments

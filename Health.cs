@@ -9,6 +9,7 @@ public class Health : MonoBehaviour
     [SerializeField] private UnityEvent onDeath;
     [Tooltip("The Unity event to be invoked when the object is damaged")]
     [SerializeField] private UnityEvent onDamage;
+    [SerializeField] private UnityEvent onHeal;
     #endregion Serialized
     public int CurrentHealth { get; private set; }
 
@@ -46,6 +47,7 @@ public class Health : MonoBehaviour
             return;
         }
         CurrentHealth += amount;
+        onHeal?.Invoke();
     }
 
     public int GetMaxHealth()
