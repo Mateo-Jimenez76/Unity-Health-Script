@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 
-[CustomEditor(typeof(Health))]
+[CustomEditor(typeof(Health),true)]
 public class HealthCustomInspector : Editor
 {
     public override void OnInspectorGUI()

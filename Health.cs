@@ -9,11 +9,20 @@ public class Health : MonoBehaviour
     [SerializeField] protected UnityEvent onDeath;
     [Tooltip("The Unity event to be invoked when the object is damaged")]
     [SerializeField] protected UnityEvent onDamage;
+    [Tooltip("The Unity event to be invoked when the object is healed")]
     [SerializeField] protected UnityEvent onHeal;
     #endregion Serialized
     public int CurrentHealth { get; private set; }
 
     #region Methods
+    protected void OnValidate()
+    {
+        if (maxHealth < 0)
+        {
+            maxHealth = 1;
+            Debug.LogWarning("Max health cannot be 0 or less. Setting max health to 1.");
+        }
+    }
 
     //Awake is called the frame the gameObject becomes active
     protected void Awake()
@@ -29,8 +38,9 @@ public class Health : MonoBehaviour
     {
         CurrentHealth -= amount;
         onDamage?.Invoke();
-        if(CurrentHealth <= 0)
+        if (CurrentHealth <= 0)
         {
+            CurrentHealth = 0;
             onDeath?.Invoke();
         }
         return;

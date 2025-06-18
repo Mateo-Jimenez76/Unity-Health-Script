@@ -3,8 +3,7 @@ using UnityEngine.UI;
 /// <summary>
 /// Script automatically sets up a slider to display the health of the object. Inherits from Health, no need to add Health component separately.
 /// </summary>
-[RequireComponent(typeof(Health))]
-public class HealthDisplayer : Health
+public class HealthAndDisplay : Health
 {
 
     [Header("Slider Settings")]
@@ -13,8 +12,9 @@ public class HealthDisplayer : Health
     [SerializeField] private Color fillColor = Color.green;
 
 
-    private void OnValidate()
+    private new void OnValidate()
     {
+        base.OnValidate();
         if (slider != null)
         {
             slider.maxValue = GetMaxHealth();
@@ -22,6 +22,7 @@ public class HealthDisplayer : Health
             slider.fillRect.GetComponent<Image>().color = fillColor;
             slider.GetComponentInChildren<Image>().color = backgroundColor;
             slider.enabled = true; // Re-enables the slider after setting the colors
+            AddListeners();
         }
     }
 
@@ -32,8 +33,7 @@ public class HealthDisplayer : Health
         {
             slider.value = CurrentHealth;
         }
-        onDamage.AddListener(() => UpdateHealthDisplay());
-        onHeal.AddListener(() => UpdateHealthDisplay());
+        AddListeners();
     }
 
     private void UpdateHealthDisplay()
@@ -42,5 +42,11 @@ public class HealthDisplayer : Health
         {
             slider.value = CurrentHealth;
         }
+    }
+
+    public void AddListeners()
+    {
+        onDamage.AddListener(() => UpdateHealthDisplay());
+        onHeal.AddListener(() => UpdateHealthDisplay());
     }
 }
