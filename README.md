@@ -15,3 +15,4 @@ Documentation Comments
 ![Screenshot (8)](https://github.com/user-attachments/assets/10d53d93-a514-445c-bc55-5a2ae5af9dca)
 
 The Unity Event System is used to control what happens after the health has been decreased and or has reached 0
+A visualization script is here that allows you to display the health using a unity slider ui component.
