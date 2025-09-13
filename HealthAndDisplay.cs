@@ -21,8 +21,7 @@ public class HealthAndDisplay : Health
             slider.enabled = false; // Prevents an editor bug which sets the slider to 0
             slider.fillRect.GetComponent<Image>().color = fillColor;
             slider.GetComponentInChildren<Image>().color = backgroundColor;
-            slider.enabled = true; // Re-enables the slider after setting the colors
-            AddListeners();
+            slider.enabled = true; // Re-enables the slider after setting the colorss
         }
     }
 
@@ -32,16 +31,14 @@ public class HealthAndDisplay : Health
         if (slider != null)
         {
             slider.value = CurrentHealth;
+            AddListeners();
         }
-        AddListeners();
+
     }
 
     private void UpdateHealthDisplay()
     {
-        if (slider != null)
-        {
-            slider.value = CurrentHealth;
-        }
+        slider.value = CurrentHealth;
     }
 
     public void AddListeners()
