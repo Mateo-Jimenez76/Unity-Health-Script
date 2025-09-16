@@ -5,7 +5,7 @@ public class Health : MonoBehaviour
     #region Serialized
     [Tooltip("The max health that the object will have.")]
     [SerializeField] protected int maxHealth = 100;
-    [Tooltip("The Unity event to be invoked when the health reaches or is below 0")]
+    [Tooltip("The Unity event to be invoked when the health reaches or is below 0 after the damage function has been called.")]
     [SerializeField] protected UnityEvent onDeath;
     [Tooltip("The Unity event to be invoked when the object is damaged")]
     [SerializeField] protected UnityEvent onDamage;
@@ -24,14 +24,13 @@ public class Health : MonoBehaviour
         }
     }
 
-    //Awake is called the frame the gameObject becomes active
     protected void Awake()
     {
         CurrentHealth = maxHealth;
     }
 
     /// <summary>
-    /// Subtracts the current health by the given value
+    /// Subtracts the current health of the object by the provide amount.
     /// </summary>
     /// <param name="amount">The int value that is used to subtract from the current health of the object</param>
     public void Damage(int amount)
@@ -65,4 +64,5 @@ public class Health : MonoBehaviour
         return maxHealth;
     }
     #endregion Methods
+
 }
