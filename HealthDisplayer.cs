@@ -3,9 +3,11 @@ using UnityEngine.UI;
 /// <summary>
 /// Script automatically sets up a slider to display the health of the object. Inherits from Health, no need to add Health component separately.
 /// </summary>
-public class HealthAndDisplay : Health
+[RequireComponent(typeof(Health))]
+public class HealthDisplayer : MonoBehavior
 {
-
+    [SerializeField] private DisplayType displayType;
+    
     [Header("Slider Settings")]
     [SerializeField] private Slider slider;
     [SerializeField] private Color backgroundColor = Color.red;
@@ -38,12 +40,26 @@ public class HealthAndDisplay : Health
 
     private void UpdateHealthDisplay()
     {
-        slider.value = CurrentHealth;
+        if(displayType == DisplayType.Slider)
+        {
+            slider.value = CurrentHealth;
+        }
+
+        if(displayType == DisplayType.Text)
+        {
+            
+        }
     }
 
     public void AddListeners()
     {
         onDamage.AddListener(() => UpdateHealthDisplay());
         onHeal.AddListener(() => UpdateHealthDisplay());
+    }
+
+    private enum DisplayType
+    {
+        Slider,
+        Text
     }
 }
