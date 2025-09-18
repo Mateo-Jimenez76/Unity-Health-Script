@@ -15,11 +15,12 @@ public class HealthDisplayer : MonoBehavior
     [Header("Text Settings")]
     [SerializeField] private TextMeshProUGUI textObject;
     [SerializeField] private TextStyle textStyle;
+
     //Show if text Style is set to custom
     [SerializeField] private TextMeshProUGUI maxHealthTextObject;
     [SerizalizeField] private TextMeshProUGUI currentHealthTextObject;
 
-    private Health health; 
+    private Health health;
     private void Awake()
     {
         health = GetComponent<Health>();
@@ -28,13 +29,35 @@ public class HealthDisplayer : MonoBehavior
     private new void OnValidate()
     {
         base.OnValidate();
-        if (slider != null)
+        if (displayType == DisplayType.Slider && slider != null)
         {
             slider.maxValue = GetMaxHealth();
             slider.enabled = false; // Prevents an editor bug which sets the slider to 0
             slider.fillRect.GetComponent<Image>().color = fillColor;
             slider.GetComponentInChildren<Image>().color = backgroundColor;
-            slider.enabled = true; // Re-enables the slider after setting the colorss
+            slider.enabled = true; // Re-enables the slider after setting the colors
+            return;
+        }
+        if (displayType == DisplayType.Text)
+        {
+                switch (textStyle)
+                {
+                    case TextStyle.RawNumber:
+                        textObject?.text = Health.CurrentHealth;
+                        return;
+                    case TextStyle.OutOf:
+                        textObject?.text = health.CurrentHealth.ToString() + "/" + health.GetMaxHealth().ToString();
+                        return;
+                    case TextStyle.Percentage:
+                        textObject?.text = (health.CurrentHealth / health.GetMaxHealth()).ToString();
+                        return;
+                    case TextStyle.Custom:
+                        maxHealthTextObject?.text = health.GetMaxHealth();
+                        currentHealthTextObject?.text = health.CurrentHealth();
+                        return;
+                    case default:
+                        Debug.LogError("Invalid Text Style!");
+                }
         }
     }
 
@@ -51,34 +74,34 @@ public class HealthDisplayer : MonoBehavior
 
     private void UpdateHealthDisplay()
     {
-        if (displayType == DisplayType.Slider)
+        switch (displayType)
         {
-            slider.value = CurrentHealth;
-            return;
-        }
-
-        switch (textStyle)
-        {
-            case TextStyle.RawNumber:
-                textObject.text = Health.CurrentHealth;
-                break;
-            case TextStyle.OutOf:
-                textObject.text = health.CurrentHealth.ToString() + "/" + health.GetMaxHealth().ToString();
-                break;
-            case TextStyle.Percentage:
-                textObject.text = (health.CurrentHealth / health.GetMaxHealth()).ToString();
-                break;
-            case TextStyle.Custom:
-                if (maxHealthTextObject != null)
+            case DisplayType.Slider:
+                slider.value = CurrentHealth;
+                return;
+            case DisplayType.Text:
+                switch (textStyle)
                 {
-                    maxHealthTextObject.text = health.GetMaxHealth();
-                }
-                
-                if (currentHealthTextObject != null)
-                {
-                    currentHealthTextObject.text = health.CurrentHealth();
+                    case TextStyle.RawNumber:
+                        textObject?.text = Health.CurrentHealth;
+                        return;
+                    case TextStyle.OutOf:
+                        textObject?.text = health.CurrentHealth.ToString() + "/" + health.GetMaxHealth().ToString();
+                        return;
+                    case TextStyle.Percentage:
+                        textObject?.text = (health.CurrentHealth / health.GetMaxHealth()).ToString();
+                        return;
+                    case TextStyle.Custom:
+                        maxHealthTextObject?.text = health.GetMaxHealth();
+                        currentHealthTextObject?.text = health.CurrentHealth();
+                        return;
+                    case default:
+                        Debug.LogError("Invalid Text Style!");
                 }
                 break;
+            case default:
+                Debug.LogError("Invalid Display Type!");
+                return;
         }
     }
 
@@ -88,13 +111,13 @@ public class HealthDisplayer : MonoBehavior
         onHeal.AddListener(() => UpdateHealthDisplay());
     }
 
-    private enum DisplayType
+    public enum DisplayType
     {
         Slider,
         Text,
     }
 
-    private enum TextStyle
+    public enum TextStyle
     {
         //5
         RawNumber,
