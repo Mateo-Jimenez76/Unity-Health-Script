@@ -7,10 +7,12 @@ public class Health : MonoBehaviour
     [SerializeField] protected int maxHealth = 100;
     [Tooltip("The Unity event to be invoked when the health reaches or is below 0 after the damage function has been called.")]
     [SerializeField] protected UnityEvent onDeath;
-    [Tooltip("The Unity event to be invoked when the object is damaged")]
+    [Tooltip("The Unity event to be invoked when the object is damaged.")]
     [SerializeField] protected UnityEvent onDamage;
-    [Tooltip("The Unity event to be invoked when the object is healed")]
+    [Tooltip("The Unity event to be invoked when the object is healed.")]
     [SerializeField] protected UnityEvent onHeal;
+    [Tooltip("While true, prevents the loss of health.")]
+    [SerializeField] private bool invulnerable;
     #endregion Serialized
     public int CurrentHealth { get; private set; }
 
@@ -35,6 +37,10 @@ public class Health : MonoBehaviour
     /// <param name="amount">The int value that is used to subtract from the current health of the object</param>
     public void Damage(int amount)
     {
+        if(invulnerable)
+        {
+            return;
+        }
         CurrentHealth -= amount;
         onDamage?.Invoke();
         if (CurrentHealth <= 0)
@@ -66,3 +72,4 @@ public class Health : MonoBehaviour
     #endregion Methods
 
 }
+
