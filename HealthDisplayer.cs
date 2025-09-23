@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 [RequireComponent(typeof(Health))]
-public class HealthDisplayer : MonoBehavior
+public class HealthDisplayer : MonoBehaviour
 {
     [SerializeField] private DisplayType displayType;
 
@@ -24,11 +24,15 @@ public class HealthDisplayer : MonoBehavior
     private void Awake()
     {
         health = GetComponent<Health>();
+        if (slider != null)
+        {
+            slider.value = CurrentHealth;
+            AddListeners();
+        }
     }
 
-    private new void OnValidate()
+    private void OnValidate()
     {
-        base.OnValidate();
         if (displayType == DisplayType.Slider && slider != null)
         {
             slider.maxValue = GetMaxHealth();
@@ -59,17 +63,6 @@ public class HealthDisplayer : MonoBehavior
                         Debug.LogError("Invalid Text Style!");
                 }
         }
-    }
-
-    private new void Awake()
-    {
-        base.Awake();
-        if (slider != null)
-        {
-            slider.value = CurrentHealth;
-            AddListeners();
-        }
-
     }
 
     private void UpdateHealthDisplay()
@@ -111,13 +104,13 @@ public class HealthDisplayer : MonoBehavior
         onHeal.AddListener(() => UpdateHealthDisplay());
     }
 
-    public enum DisplayType
+    internal enum DisplayType
     {
         Slider,
         Text,
     }
 
-    public enum TextStyle
+    internal enum TextStyle
     {
         //5
         RawNumber,
