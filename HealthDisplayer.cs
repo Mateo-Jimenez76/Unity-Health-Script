@@ -1,65 +1,103 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-/// <summary>
-/// Script automatically sets up a slider to display the health of the object. Inherits from Health, no need to add Health component separately.
-/// </summary>
 [RequireComponent(typeof(Health))]
-public class HealthDisplayer : MonoBehavior
+public class HealthDisplayer : MonoBehaviour
 {
     [SerializeField] private DisplayType displayType;
-    
-    [Header("Slider Settings")]
-    [SerializeField] private Slider slider;
-    [SerializeField] private Color backgroundColor = Color.red;
-    [SerializeField] private Color fillColor = Color.green;
 
+    [SerializeField] private Slider Slider;
+    [SerializeField] private Color BackgroundColor = Color.red;
+    [SerializeField] private Color FillColor = Color.green;
 
-    private new void OnValidate()
+    [SerializeField] private TextMeshProUGUI TextObject;
+    [SerializeField] private TextStyle textStyle;
+
+    [SerializeField] public TextMeshProUGUI MaxHealthTextObject;
+    [SerializeField] public TextMeshProUGUI CurrentHealthTextObject;
+
+    private Health health;
+    private void Awake()
     {
-        base.OnValidate();
-        if (slider != null)
+        health = GetComponent<Health>();
+
+        if (Slider != null)
         {
-            slider.maxValue = GetMaxHealth();
-            slider.enabled = false; // Prevents an editor bug which sets the slider to 0
-            slider.fillRect.GetComponent<Image>().color = fillColor;
-            slider.GetComponentInChildren<Image>().color = backgroundColor;
-            slider.enabled = true; // Re-enables the slider after setting the colorss
+            Slider.value = health.CurrentHealth;
         }
+
+        AddListeners();
     }
 
-    private new void Awake()
+    private void OnValidate()
     {
-        base.Awake();
-        if (slider != null)
+        if (displayType == DisplayType.Slider)
         {
-            slider.value = CurrentHealth;
-            AddListeners();
+            if(Slider == null)
+            {
+                return;
+            }
+            //Set the max value of the slider
+            Slider.maxValue = health.MaxHealth;
+            Slider.enabled = false; // Prevents an editor bug which sets the slider to 0
+            //Set the fill color
+            Slider.fillRect.GetComponent<Image>().color = FillColor;
+            //Set the background color
+            Slider.GetComponentInChildren<Image>().color = BackgroundColor;
+            Slider.enabled = true; // Re-enables the slider after setting the colors
+            return;
         }
-
+        UpdateHealthDisplay();
     }
 
     private void UpdateHealthDisplay()
     {
-        if(displayType == DisplayType.Slider)
+        switch (displayType)
         {
-            slider.value = CurrentHealth;
-        }
-
-        if(displayType == DisplayType.Text)
-        {
-            
+            case DisplayType.Slider:
+                Slider.value = health.CurrentHealth;
+                return;
+            case DisplayType.Text:
+                switch (textStyle)
+                {
+                    case TextStyle.RawNumber:
+                        TextObject.text = health.CurrentHealth.ToString();
+                        return;
+                    case TextStyle.OutOf:
+                        TextObject.text = health.CurrentHealth.ToString() + "/" + health.MaxHealth.ToString();
+                        return;
+                    case TextStyle.Percentage:
+                        TextObject.text = (health.CurrentHealth / health.MaxHealth).ToString() + "%";
+                        return;
+                    case TextStyle.Custom:
+                        MaxHealthTextObject.text = health.MaxHealth.ToString();
+                        CurrentHealthTextObject.text = health.CurrentHealth.ToString();
+                        return;
+                }
+                break;
         }
     }
 
-    public void AddListeners()
+    private void AddListeners()
     {
-        onDamage.AddListener(() => UpdateHealthDisplay());
-        onHeal.AddListener(() => UpdateHealthDisplay());
+        health.SubscribeToOnDamage(() => UpdateHealthDisplay());
+        health.SubscribeToOnHeal(() => UpdateHealthDisplay());
     }
 
-    private enum DisplayType
+    public enum DisplayType
     {
         Slider,
-        Text
+        Text,
+    }
+
+    public enum TextStyle
+    {
+        //5
+        RawNumber,
+        // 5/10
+        OutOf,
+        //50%
+        Percentage,
+        Custom,
     }
 }

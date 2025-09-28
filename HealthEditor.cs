@@ -1,8 +1,8 @@
 using UnityEditor;
 using UnityEngine;
 
-[CustomEditor(typeof(Health),true)]
-public class HealthCustomInspector : Editor
+[CustomEditor(typeof(Health), true)]
+public class HealthEditor : Editor
 {
     public override void OnInspectorGUI()
     {
@@ -22,7 +22,7 @@ public class HealthCustomInspector : Editor
             health.Damage(health.GetMaxHealth());
         }
 
-        if(GUILayout.Button("Heal"))
+        if (GUILayout.Button("Heal"))
         {
             health.Heal(1);
         }

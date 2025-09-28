@@ -4,13 +4,13 @@ public class Health : MonoBehaviour
 {
     #region Serialized
     [Tooltip("The max health that the object will have.")]
-    [SerializeField] protected int maxHealth = 100;
+    [field: SerializeField] public int MaxHealth { get; private set; } = 100;
     [Tooltip("The Unity event to be invoked when the health reaches or is below 0 after the damage function has been called.")]
     [SerializeField] protected UnityEvent onDeath;
-    [Tooltip("The Unity event to be invoked when the object is damaged.")]
-    [SerializeField] protected UnityEvent onDamage;
-    [Tooltip("The Unity event to be invoked when the object is healed.")]
-    [SerializeField] protected UnityEvent onHeal;
+    [Tooltip("The Unity event to be invoked when the object is damaged")]
+    [SerializeField] private UnityEvent onDamage;
+    [Tooltip("The Unity event to be invoked when the object is healed")]
+    [SerializeField] private UnityEvent onHeal;
     [Tooltip("While true, prevents the loss of health.")]
     [SerializeField] private bool invulnerable;
     #endregion Serialized
@@ -19,16 +19,16 @@ public class Health : MonoBehaviour
     #region Methods
     protected void OnValidate()
     {
-        if (maxHealth < 0)
+        if (MaxHealth < 0)
         {
-            maxHealth = 1;
+            MaxHealth = 1;
             Debug.LogWarning("Max health cannot be 0 or less. Setting max health to 1.");
         }
     }
 
     protected void Awake()
     {
-        CurrentHealth = maxHealth;
+        CurrentHealth = MaxHealth;
     }
 
     /// <summary>
@@ -56,18 +56,43 @@ public class Health : MonoBehaviour
     /// <param name="amount">The int value that is used to add to the current health of the object</param>
     public void Heal(int amount)
     {
-        if (CurrentHealth + amount > maxHealth)
+        if (CurrentHealth + amount > MaxHealth)
         {
-            CurrentHealth = maxHealth;
+            CurrentHealth = MaxHealth;
             return;
         }
         CurrentHealth += amount;
         onHeal?.Invoke();
     }
 
-    public int GetMaxHealth()
+    public void SubscribeToOnDeath(UnityAction action)
     {
-        return maxHealth;
+        onDeath.AddListener(action);
+    }
+
+    public void SubscribeToOnDamage(UnityAction action)
+    {
+        onDamage.AddListener(action);
+    }
+
+    public void SubscribeToOnHeal(UnityAction action)
+    {
+        onHeal.AddListener(action);
+    }
+
+    public void UnsubscribeFromOnDeath(UnityAction action)
+    {
+        onDeath.RemoveListener(action);
+    }
+
+    public void UnsubscribeFromOnDamage(UnityAction action)
+    {
+        onDamage.RemoveListener(action);
+    }
+
+    public void UnsubscribeFromOnHeal(UnityAction action)
+    {
+        onHeal.RemoveListener(action);
     }
     #endregion Methods
 
