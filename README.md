@@ -10,6 +10,6 @@ To deal damage call the `Damage(int amount)` function. When damage is taken all 
 ### Healing
 To heal call the `Heal(int amount)` function. This function will invoke all events in the `OnHealh UnityEvent`.
 ### Subscribing / Unsubscribing From Events
-If you would like to subscribe to the events through scripts to can call `SubscribeTo...(UnityAction action)` followed by the name of the corresponding Unity Event. Ex: `SubscribeToOnDeath(UnityAction action)`. To unsubscribe is the same process but instead you call `UnsubscribeFrom...(UnityAction action)` with the UnityAction you wish to remove from the Event.
+If you would like to subscribe to the events through scripts you can call `SubscribeTo...(UnityAction action)` followed by the name of the corresponding Unity Event. Ex: `SubscribeToOnDeath(UnityAction action)`. To unsubscribe is the same process but instead you call `UnsubscribeFrom...(UnityAction action)` with the UnityAction you wish to remove from the Event.
 
 
