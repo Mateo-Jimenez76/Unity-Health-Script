@@ -19,7 +19,7 @@ public class HealthEditor : Editor
 
         if (GUILayout.Button("Die"))
         {
-            health.Damage(health.GetMaxHealth());
+            health.Damage(health.MaxHealth);
         }
 
         if (GUILayout.Button("Heal"))

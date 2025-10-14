@@ -14,10 +14,10 @@ public class Health : MonoBehaviour
     [Tooltip("While true, prevents the loss of health.")]
     [SerializeField] private bool invulnerable;
     #endregion Serialized
-    public int CurrentHealth { get; private set; }
+    public int CurrentHealth { get; private set; } = 0;
 
     #region Methods
-    protected void OnValidate()
+    private void OnValidate()
     {
         if (MaxHealth < 0)
         {
@@ -26,7 +26,7 @@ public class Health : MonoBehaviour
         }
     }
 
-    protected void Awake()
+    private void Awake()
     {
         CurrentHealth = MaxHealth;
     }

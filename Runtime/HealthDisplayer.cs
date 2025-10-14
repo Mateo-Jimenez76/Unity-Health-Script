@@ -20,42 +20,64 @@ public class HealthDisplayer : MonoBehaviour
     private void Awake()
     {
         health = GetComponent<Health>();
+    }
 
-        if (Slider != null)
-        {
-            Slider.value = health.CurrentHealth;
-        }
-
+    private void Start()
+    {
         AddListeners();
     }
 
-    private void OnValidate()
-    {
-        if (displayType == DisplayType.Slider)
-        {
-            if(Slider == null)
-            {
-                return;
-            }
-            //Set the max value of the slider
-            Slider.maxValue = health.MaxHealth;
-            Slider.enabled = false; // Prevents an editor bug which sets the slider to 0
-            //Set the fill color
-            Slider.fillRect.GetComponent<Image>().color = FillColor;
-            //Set the background color
-            Slider.GetComponentInChildren<Image>().color = BackgroundColor;
-            Slider.enabled = true; // Re-enables the slider after setting the colors
-            return;
-        }
-        UpdateHealthDisplay();
-    }
-
-    private void UpdateHealthDisplay()
+    /// <summary>
+    /// 
+    /// </summary>
+    public void UpdateHealthDisplayEditor()
     {
         switch (displayType)
         {
             case DisplayType.Slider:
-                Slider.value = health.CurrentHealth;
+                if(Slider == null) { return; }
+                //Set the max value of the slider
+                Slider.maxValue = 100;
+                Slider.enabled = false; // Prevents an editor bug which sets the slider to 0
+                                        //Set the fill color
+                Slider.fillRect.GetComponent<Image>().color = FillColor;
+                //Set the background color
+                Slider.GetComponentInChildren<Image>().color = BackgroundColor;
+                Slider.enabled = true; // Re-enables the slider after setting the colors
+                return;
+            case DisplayType.Text:
+                switch (textStyle)
+                {
+                    case TextStyle.RawNumber:
+                        if(TextObject == null) { return; }
+                        TextObject.text = "50";
+                        return;
+                    case TextStyle.OutOf:
+                        if (TextObject == null) { return; }
+                        TextObject.text = 50 + "/" + 100;
+                        return;
+                    case TextStyle.Percentage:
+                        if (TextObject == null) { return; }
+                        TextObject.text = (50.0 / 100.0 * 100.0).ToString() + "%";
+                        return;
+                    case TextStyle.Custom:
+                        if (MaxHealthTextObject == null) { return; }
+                        if (CurrentHealthTextObject == null) { return; }
+                        MaxHealthTextObject.text = "100";
+                        CurrentHealthTextObject.text = "50";
+                        return;
+                }
+                break;
+        }
+    }
+
+    private void UpdateHealthDisplayRuntime()
+    {
+        switch (displayType)
+        {
+            case DisplayType.Slider:
+                //Set the max value of the slider
+                Slider.maxValue = health.CurrentHealth;
                 return;
             case DisplayType.Text:
                 switch (textStyle)
@@ -80,8 +102,8 @@ public class HealthDisplayer : MonoBehaviour
 
     private void AddListeners()
     {
-        health.SubscribeToOnDamage(() => UpdateHealthDisplay());
-        health.SubscribeToOnHeal(() => UpdateHealthDisplay());
+        health.SubscribeToOnDamage(() => UpdateHealthDisplayRuntime());
+        health.SubscribeToOnHeal(() => UpdateHealthDisplayRuntime());
     }
 
     public enum DisplayType
