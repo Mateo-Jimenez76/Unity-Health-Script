@@ -19,6 +19,8 @@ jobs:
           fetch-depth: 0
 
       - name: Update CHANGELOG
+        # Explicitly use bash so bash-only features (declare -A, [[ =~ ]]) are supported.
+        shell: bash
         env:
           BEFORE: ${{ github.event.before }}
           AFTER: ${{ github.sha }}
@@ -33,7 +35,9 @@ jobs:
           CHANGELOG_FILE="${CHANGELOG_PATH:-CHANGELOG.md}"
 
           # Compute range (handle initial commit)
-          if [[ -z "$BEFORE" || "$BEFORE" =~ ^0+$ ]]; then
+          # GitHub uses an all-zero SHA for "before" on the initial push.
+          # Use a POSIX-safe check for an all-zero value to be robust.
+          if [ -z "$BEFORE" ] || printf '%s' "$BEFORE" | grep -Eq '^0+$'; then
             RANGE="$AFTER"
           else
             RANGE="$BEFORE..$AFTER"
