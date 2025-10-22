@@ -30,7 +30,7 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           output-file: "CHANGELOG.md"
           # Add this line to point to your custom config file
-          config-file: "./changelog-config.js"
+          config-file-path: "./changelog-config.js"
           
 
       # Step 3: Commit and push the updated CHANGELOG.md
