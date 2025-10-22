@@ -1,4 +1,4 @@
-##  (2025-10-22)
+## 0.1.0 (2025-10-22)
 
 * "add" ([2c9f7bf](https://github.com/Mateo-Jimenez76/Unity-Health-Script/commit/2c9f7bf))
 * Add issue templates ([9adcea5](https://github.com/Mateo-Jimenez76/Unity-Health-Script/commit/9adcea5))
@@ -24,6 +24,7 @@
 * Quality of Life Updates To Health.cs ([a20f167](https://github.com/Mateo-Jimenez76/Unity-Health-Script/commit/a20f167))
 * Refactor changelog workflow for clarity and efficiency ([3882372](https://github.com/Mateo-Jimenez76/Unity-Health-Script/commit/3882372))
 * Refactor HealthEditor to use Awake for initialization ([37f3727](https://github.com/Mateo-Jimenez76/Unity-Health-Script/commit/37f3727))
+* refactor(HealthDisplayer.cs):Change Awake method to Start. ([1c0c91a](https://github.com/Mateo-Jimenez76/Unity-Health-Script/commit/1c0c91a))
 * Remove unnecessary comment from changelog config ([0aa166d](https://github.com/Mateo-Jimenez76/Unity-Health-Script/commit/0aa166d))
 * Rename config-file to config-file-path in changelog.yml ([ef21ddd](https://github.com/Mateo-Jimenez76/Unity-Health-Script/commit/ef21ddd))
 * Update ([f6bdd14](https://github.com/Mateo-Jimenez76/Unity-Health-Script/commit/f6bdd14))
@@ -48,6 +49,7 @@
 * Update README.md ([c4cf6a5](https://github.com/Mateo-Jimenez76/Unity-Health-Script/commit/c4cf6a5))
 * Update README.md ([26c9193](https://github.com/Mateo-Jimenez76/Unity-Health-Script/commit/26c9193))
 * Update README.md ([5dd631c](https://github.com/Mateo-Jimenez76/Unity-Health-Script/commit/5dd631c))
+* chore(release): vnull [skip ci] ([68208cc](https://github.com/Mateo-Jimenez76/Unity-Health-Script/commit/68208cc))
 
 
 
