@@ -27,12 +27,11 @@ jobs:
       - name: Generate Changelog
         uses: TriPSs/conventional-changelog-action@v5
         with:
-          # This is the token that allows the action to access repo content
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          # The name of the file to be updated
           output-file: "CHANGELOG.md"
-          # Optional: Specify a preset for the changelog format (e.g., 'angular', 'atom')
-          # preset: 'angular'
+          # Add this line to point to your custom config file
+          config-file: "./changelog-config.js"
+          
 
       # Step 3: Commit and push the updated CHANGELOG.md
       - name: Commit Updated Changelog
