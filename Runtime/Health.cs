@@ -7,9 +7,9 @@ public class Health : MonoBehaviour
     [field: SerializeField] public int MaxHealth { get; private set; } = 100;
     [Tooltip("The Unity event to be invoked when the health reaches or is below 0 after the OnDamage event is invoked.")]
     [SerializeField] private UnityEvent _onDeath;
-    [Tooltip("The Unity event to be invoked when the object is damaged")]
+    [Tooltip("The Unity event to be invoked when the object is damaged.")]
     [SerializeField] private UnityEvent _onDamage;
-    [Tooltip("The Unity event to be invoked when the object is healed")]
+    [Tooltip("The Unity event to be invoked when the object is healed.")]
     [SerializeField] private UnityEvent _onHeal;
     [Tooltip("While true, prevents the loss of health.")]
     [SerializeField] private bool _invulnerable;
