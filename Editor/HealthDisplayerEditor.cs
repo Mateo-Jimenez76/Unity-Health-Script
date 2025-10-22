@@ -1,5 +1,4 @@
 using UnityEditor;
-
 [CustomEditor(typeof(HealthDisplayer), true)]
 public class HealthDisplayerEditor : Editor
 {
