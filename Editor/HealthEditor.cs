@@ -4,11 +4,15 @@ using UnityEngine;
 [CustomEditor(typeof(Health), true)]
 public class HealthEditor : Editor
 {
+    Health health;
+    public void Awake()
+    {
+        health = (Health)target;
+    }
+    
     public override void OnInspectorGUI()
     {
         base.OnInspectorGUI();
-
-        Health health = (Health)target;
 
         //Makes inspector settings side by side
         GUILayout.BeginHorizontal();
