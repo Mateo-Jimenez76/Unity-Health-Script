@@ -1,6 +1,5 @@
 module.exports = {
   // This configuration extends the standard "angular" preset.
-  // We are essentially just adding a new section for 'refactor' commits.
   types: [
     { type: 'feat', section: 'Features' },
     { type: 'fix', section: 'Bug Fixes' },
