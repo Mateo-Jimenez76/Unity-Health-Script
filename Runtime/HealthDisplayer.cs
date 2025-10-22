@@ -28,7 +28,7 @@ public class HealthDisplayer : MonoBehaviour
     }
 
     /// <summary>
-    /// 
+    /// Updates the displaying health info with preset sample values. DO NOT USE IN PLAYMODE!
     /// </summary>
     public void UpdateHealthDisplayEditor()
     {
@@ -70,7 +70,7 @@ public class HealthDisplayer : MonoBehaviour
                 break;
         }
     }
-
+    
     private void UpdateHealthDisplayRuntime()
     {
         switch (displayType)
