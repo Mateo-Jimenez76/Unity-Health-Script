@@ -29,7 +29,8 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           output-file: "CHANGELOG.md"
-          # Add this line to point to your custom config file
+          preset: 'angular'
+          #point to custom config file
           config-file-path: "./changelog-config.js"
           
 
