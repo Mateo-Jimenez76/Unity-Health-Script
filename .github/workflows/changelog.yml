@@ -31,7 +31,7 @@ jobs:
           output-file: "CHANGELOG.md"
           preset: 'angular'
           #point to custom config file
-          config-file-path: "./changelog-config.js"
+          #config-file-path: "./changelog-config.js"
           
 
       # Step 3: Commit and push the updated CHANGELOG.md
