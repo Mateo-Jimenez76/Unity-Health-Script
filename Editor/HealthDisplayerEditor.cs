@@ -16,6 +16,10 @@ public class HealthDisplayerEditor : Editor
     {
         healthDisplayer = (HealthDisplayer)target;
         // Get references
+        AssingSerializedProperty();
+    }
+    private void AssingSerializedProperty()
+    {
         displayTypeProp = serializedObject.FindProperty("displayType");
         textObject = serializedObject.FindProperty("TextObject");
         slider = serializedObject.FindProperty("Slider");
