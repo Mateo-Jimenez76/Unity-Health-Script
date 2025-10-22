@@ -1,6 +1,6 @@
 {
   "name": "com.maxgreenhill.healthsystem",
-  "version": "1.0.0",
+  "version": null,
   "displayName": "Health System",
   "description": "Health and display system.",
   "unity": "6000.0",
@@ -8,11 +8,9 @@
   "documentationUrl": "https://example.com/",
   "changelogUrl": "https://example.com/changelog.html",
   "licensesUrl": "https://example.com/licensing.html",
-  "dependencies":
-  {
+  "dependencies": {
     "com.unity.ugui": "2.0.0"
   },
-
   "keywords": [
     "Health",
     "Health System"
