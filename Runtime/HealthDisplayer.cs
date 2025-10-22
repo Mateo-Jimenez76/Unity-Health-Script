@@ -17,7 +17,7 @@ public class HealthDisplayer : MonoBehaviour
     [SerializeField] public TextMeshProUGUI CurrentHealthTextObject;
 
     private Health health;
-    private void Awake()
+    private void Start()
     {
         health = GetComponent<Health>();
     }
