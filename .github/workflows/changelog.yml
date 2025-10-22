@@ -1,0 +1,42 @@
+name: Update Changelog
+
+# This workflow runs on every push to the 'main' or 'master' branch
+on:
+  push:
+    branches:
+      - "main"
+      - "master"
+
+jobs:
+  build:
+    # We need write permissions to push the updated changelog back to the repo
+    permissions:
+      contents: write
+
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Check out your repository's code
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          # We need to fetch all history and tags for the changelog generator
+          fetch-depth: 0
+
+      # Step 2: Generate the changelog
+      - name: Generate Changelog
+        uses: TriPSs/conventional-changelog-action@v5
+        with:
+          # This is the token that allows the action to access repo content
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          # The name of the file to be updated
+          output-file: "CHANGELOG.md"
+          # Optional: Specify a preset for the changelog format (e.g., 'angular', 'atom')
+          # preset: 'angular'
+
+      # Step 3: Commit and push the updated CHANGELOG.md
+      - name: Commit Updated Changelog
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore(docs): update CHANGELOG.md [skip ci]"
+          file_pattern: "CHANGELOG.md"
