@@ -23,8 +23,8 @@ public class HealthDisplayerEditor : Editor
         displayTypeProp = serializedObject.FindProperty("displayType");
         textObject = serializedObject.FindProperty("TextObject");
         slider = serializedObject.FindProperty("Slider");
-        backgroundColor = serializedObject.FindProperty("BackgroundColor"));
-        maxHealthTextObject =  = serializedObject.FindProperty(nameof(HealthDisplayer.MaxHealthTextObject));
+        backgroundColor = serializedObject.FindProperty("BackgroundColor");
+        maxHealthTextObject = serializedObject.FindProperty(nameof(HealthDisplayer.MaxHealthTextObject));
         currentHealthTextObject = serializedObject.FindProperty(nameof(HealthDisplayer.CurrentHealthTextObject));
         fillColor = serializedObject.FindProperty("FillColor");
         textStyleProp = serializedObject.FindProperty("textStyle");
