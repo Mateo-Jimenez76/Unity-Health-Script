@@ -1,3 +1,13 @@
+## [1.1.3](https://github.com/Mateo-Jimenez76/Unity-Health-Script/compare/v1.1.2...v1.1.3) (2025-10-23)
+
+
+### Bug Fixes
+
+* Corrected bad syntax ([cf8e8e8](https://github.com/Mateo-Jimenez76/Unity-Health-Script/commit/cf8e8e8bc29aa369df80a9d39752aa875176f873))
+* Improved Assembly Definitions names ([fe8dce1](https://github.com/Mateo-Jimenez76/Unity-Health-Script/commit/fe8dce11167859fd0346cf3c2f3398a4f72d2b34))
+
+
+
 ## [1.1.2](https://github.com/Mateo-Jimenez76/Unity-Health-Script/compare/v1.1.1...v1.1.2) (2025-10-23)
 
 
