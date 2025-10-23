@@ -1,5 +1,5 @@
 {
-    "name": "HealthSystem.Scripts.Editor",
+    "name": "HealthSystem.Editor",
     "rootNamespace": "",
     "references": [
         "GUID:c6dc6ae42f422474d90695d8ecfb08b2",
