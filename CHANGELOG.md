@@ -1,3 +1,12 @@
+## [1.1.4](https://github.com/Mateo-Jimenez76/Unity-Health-Script/compare/v1.1.3...v1.1.4) (2025-10-24)
+
+
+### Bug Fixes
+
+* HealthSystem.Editor broken assembly reference to HealthSystem.Runtime ([0eca488](https://github.com/Mateo-Jimenez76/Unity-Health-Script/commit/0eca48846b2a98370bd750af185a76921505a393))
+
+
+
 ## [1.1.3](https://github.com/Mateo-Jimenez76/Unity-Health-Script/compare/v1.1.2...v1.1.3) (2025-10-23)
 
 
