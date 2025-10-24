@@ -76,8 +76,7 @@ public class HealthDisplayer : MonoBehaviour
         switch (displayType)
         {
             case DisplayType.Slider:
-                //Set the max value of the slider
-                Slider.maxValue = health.CurrentHealth;
+                Slider.value = health.CurrentHealth;
                 return;
             case DisplayType.Text:
                 switch (textStyle)
