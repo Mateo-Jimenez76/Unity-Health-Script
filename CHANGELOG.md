@@ -1,3 +1,12 @@
+## [1.1.6](https://github.com/Mateo-Jimenez76/Unity-Health-Script/compare/v1.1.5...v1.1.6) (2025-10-31)
+
+
+### Bug Fixes
+
+* fixed missing assembly definition reference ([0f9d7a4](https://github.com/Mateo-Jimenez76/Unity-Health-Script/commit/0f9d7a404e17938540858e76ef5a3a86e3f17e42))
+
+
+
 ## [1.1.5](https://github.com/Mateo-Jimenez76/Unity-Health-Script/compare/v1.1.4...v1.1.5) (2025-10-24)
 
 
@@ -33,17 +42,6 @@
 
 * Added missing meta files ([5482ce9](https://github.com/Mateo-Jimenez76/Unity-Health-Script/commit/5482ce99920ecf418c4ab5c6e81de287856f39c5))
 * Removed duplicate start() from HealthDisplayer.cs ([a0d26bf](https://github.com/Mateo-Jimenez76/Unity-Health-Script/commit/a0d26bf14c433c00140879b9f54f5306c36bb718))
-
-
-
-## [1.1.1](https://github.com/Mateo-Jimenez76/Unity-Health-Script/compare/v0.1.0...v1.1.1) (2025-10-22)
-
-
-### Bug Fixes
-
-* fixed punctuation in tooltips. ([6931027](https://github.com/Mateo-Jimenez76/Unity-Health-Script/commit/6931027e16e117ee5cf5225322c98173be3d83df))
-* organized assignment calls into their own function ([1a9152d](https://github.com/Mateo-Jimenez76/Unity-Health-Script/commit/1a9152d645067033fa00188a3a85f6c867e2febc))
-* removed white space (test commit) ([62724a3](https://github.com/Mateo-Jimenez76/Unity-Health-Script/commit/62724a34ac7d451610c426e9240cdc2bbad3208f))
 
 
 
