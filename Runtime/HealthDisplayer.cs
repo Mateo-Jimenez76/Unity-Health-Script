@@ -16,14 +16,11 @@ public class HealthDisplayer : MonoBehaviour
     [SerializeField] public TextMeshProUGUI MaxHealthTextObject;
     [SerializeField] public TextMeshProUGUI CurrentHealthTextObject;
 
-    private Health health;
+    public Health Health { get; private set; }
+
     private void Awake()
     {
-        health = GetComponent<Health>();
-    }
-
-    private void Start()
-    {
+        Health = GetComponent<Health>();
         AddListeners();
     }
 
@@ -76,23 +73,23 @@ public class HealthDisplayer : MonoBehaviour
         switch (displayType)
         {
             case DisplayType.Slider:
-                Slider.value = health.CurrentHealth;
+                Slider.value = Health.CurrentHealth;
                 return;
             case DisplayType.Text:
                 switch (textStyle)
                 {
                     case TextStyle.RawNumber:
-                        TextObject.text = health.CurrentHealth.ToString();
+                        TextObject.text = Health.CurrentHealth.ToString();
                         return;
                     case TextStyle.OutOf:
-                        TextObject.text = health.CurrentHealth.ToString() + "/" + health.MaxHealth.ToString();
+                        TextObject.text = Health.CurrentHealth.ToString() + "/" + Health.MaxHealth.ToString();
                         return;
                     case TextStyle.Percentage:
-                        TextObject.text = (health.CurrentHealth / health.MaxHealth).ToString() + "%";
+                        TextObject.text = (Health.CurrentHealth / Health.MaxHealth).ToString() + "%";
                         return;
                     case TextStyle.Custom:
-                        MaxHealthTextObject.text = health.MaxHealth.ToString();
-                        CurrentHealthTextObject.text = health.CurrentHealth.ToString();
+                        MaxHealthTextObject.text = Health.MaxHealth.ToString();
+                        CurrentHealthTextObject.text = Health.CurrentHealth.ToString();
                         return;
                 }
                 break;
@@ -101,8 +98,8 @@ public class HealthDisplayer : MonoBehaviour
 
     private void AddListeners()
     {
-        health.SubscribeToOnDamage(() => UpdateHealthDisplayRuntime());
-        health.SubscribeToOnHeal(() => UpdateHealthDisplayRuntime());
+        Health.SubscribeToOnDamage(() => UpdateHealthDisplayRuntime());
+        Health.SubscribeToOnHeal(() => UpdateHealthDisplayRuntime());
     }
 
     public enum DisplayType

@@ -6,11 +6,11 @@ public class Health : MonoBehaviour
     [Tooltip("The max health that the object will have.")]
     [field: SerializeField] public int MaxHealth { get; private set; } = 100;
     [Tooltip("The Unity event to be invoked when the health reaches or is below 0 after the OnDamage event is invoked.")]
-    [SerializeField] private UnityEvent _onDeath;
+    [SerializeField] private UnityEvent _onDeath = new();
     [Tooltip("The Unity event to be invoked when the object is damaged.")]
-    [SerializeField] private UnityEvent _onDamage;
+    [SerializeField] private UnityEvent _onDamage = new();
     [Tooltip("The Unity event to be invoked when the object is healed.")]
-    [SerializeField] private UnityEvent _onHeal;
+    [SerializeField] private UnityEvent _onHeal = new();
     [Tooltip("While true, prevents the loss of health.")]
     [SerializeField] private bool _invulnerable;
     #endregion Serialized
@@ -35,34 +35,53 @@ public class Health : MonoBehaviour
     /// Subtracts the current health of the object by the provide amount.
     /// </summary>
     /// <param name="amount">The int value that is used to subtract from the current health of the object</param>
-    public void Damage(int amount)
+    /// <returns>true if damaged successfully, false otherwise.</returns>
+    public bool Damage(int amount)
     {
+        if(amount <= 0)
+        {
+            Debug.LogWarning("Damage amount must be greater than 0!");
+            return false;
+        }
         if(_invulnerable)
         {
-            return;
+            return false;
         }
-        CurrentHealth -= amount;
-        _onDamage?.Invoke();
-        if (CurrentHealth <= 0)
+        if (CurrentHealth - amount < 0)
         {
             CurrentHealth = 0;
-            _onDeath?.Invoke();
         }
-        return;
+        else
+        {
+            CurrentHealth -= amount;
+        }
+        _onDamage?.Invoke();
+        return true;
     }
     /// <summary>
     /// Does addition to the current health by the given value
     /// </summary>
-    /// <param name="amount">The int value that is used to add to the current health of the object</param>
-    public void Heal(int amount)
+    /// <param name="amount">The int value that is used to added to the current health of the object</param>
+    /// <returns>true if healed successfully, false otherwise.</returns>
+    public bool Heal(int amount)
     {
+        if (amount <= 0)
+        {
+            Debug.LogWarning("Heal amount must be greater than 0!");
+            return false;
+        }
+        if(CurrentHealth == MaxHealth)
+        {
+            return false;
+        }
         if (CurrentHealth + amount > MaxHealth)
         {
             CurrentHealth = MaxHealth;
-            return;
+            return true;
         }
         CurrentHealth += amount;
         _onHeal?.Invoke();
+        return true;
     }
 
     public void SubscribeToOnDeath(UnityAction action)
