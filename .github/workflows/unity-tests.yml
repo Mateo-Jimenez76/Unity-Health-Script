@@ -1,0 +1,33 @@
+name: Unity Package Runtime Tests
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  runTests:
+    name: Run Runtime Tests
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2. Run the tests using GameCI's 'unity-tester' action
+      - name: Run Unity tests
+        uses: game-ci/unity-tester@v4
+        env:
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+          # If you have a Unity Pro/Plus license, use this instead:
+          # UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+        with:
+          testMode: PlayMode 
+
+      - name: Upload test results
+        uses: actions/upload-artifact@v4
+        if: always() # 'always()' ensures this runs even if tests fail
+        with:
+          name: test-playmode-results
+          path: artifacts # game-ci/unity-tester outputs results to 'artifacts'
