@@ -25,7 +25,7 @@ jobs:
           UNITY_LICENSE: ${{secrets.UNITY_LICENSE}}
         with:
           packageMode: true
-          unityVersion: 6000.2.8f1
+          unityVersion: '6000.2.8f1'
           projectPath: my-package
 
       - name: Upload test results
