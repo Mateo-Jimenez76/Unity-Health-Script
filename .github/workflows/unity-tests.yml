@@ -16,7 +16,7 @@ jobs:
 
       # 2. Run the tests using GameCI's 'unity-tester' action
       - name: Run Unity tests
-        uses: game-ci/unity-tester@v4
+        uses: game-ci/unity-test-runner@v4.3.1
         env:
           UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
