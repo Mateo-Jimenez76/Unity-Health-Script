@@ -13,6 +13,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+            path: my-package
 
       # 2. Run the tests using GameCI's 'unity-tester' action
       - name: Run Unity tests
@@ -21,11 +23,10 @@ jobs:
           UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
           UNITY_LICENSE: ${{secrets.UNITY_LICENSE}}
-          # If you have a Unity Pro/Plus license, use this instead:
-          # UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
           packageMode: true
           unityVersion: 6000.2.8f1
+          projectPath: my-package
 
       - name: Upload test results
         uses: actions/upload-artifact@v4
