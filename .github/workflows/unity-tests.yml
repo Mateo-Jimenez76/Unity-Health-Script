@@ -24,7 +24,8 @@ jobs:
           # If you have a Unity Pro/Plus license, use this instead:
           # UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
-          testMode: PlayMode 
+          packageMode: true
+          unityVersion: 6000.2.8f1
 
       - name: Upload test results
         uses: actions/upload-artifact@v4
