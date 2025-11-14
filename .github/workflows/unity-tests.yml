@@ -1,4 +1,6 @@
 name: Unity Package Runtime Tests
+permissions:
+  contents: read
 
 on:
   push:
