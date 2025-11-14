@@ -24,6 +24,11 @@ public class HealthDisplayer : MonoBehaviour
         AddListeners();
     }
 
+    private void Start()
+    {
+        UpdateHealthDisplayRuntime();
+    }
+
     /// <summary>
     /// Updates the displaying health info with preset sample values. DO NOT USE IN PLAYMODE!
     /// </summary>
