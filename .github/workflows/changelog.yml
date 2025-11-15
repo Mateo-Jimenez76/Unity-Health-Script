@@ -10,30 +10,47 @@ jobs:
   build:
     permissions:
       contents: write
-
+      pull-requests: write
+      
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Check out your repository's code
       - name: Checkout Code
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      # Step 2: Generate the changelog
       - name: Generate Changelog
+        id: changelog
         uses: TriPSs/conventional-changelog-action@v5
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           output-file: "CHANGELOG.md"
           preset: 'angular'
-          #point to custom config file
-          #config-file-path: "./changelog-config.js"
-          
+          git-push: 'false'
 
-      # Step 3: Commit and push the updated CHANGELOG.md
-      - name: Commit Updated Changelog
-        uses: stefanzweifel/git-auto-commit-action@v5
+      - name: Create Pull Request
+        # This step only runs if the changelog action created a new version
+        if: steps.changelog.outputs.skipped == 'false'
+        uses: auto-pr/easy-pull-request@v1
         with:
-          commit_message: "chore(docs): update CHANGELOG.md [skip ci]"
-          file_pattern: "CHANGELOG.md"
+
+          token: ${{ secrets.GITHUB_TOKEN }}
+          
+          # The name of the new branch to create
+          branch: 'changelog/release-v${{ steps.changelog.outputs.version }}'
+          
+          # The branch to merge into
+          base_branch: 'main'
+          
+          # The title of the pull request
+          title: 'chore(release): v${{ steps.changelog.outputs.version }}'
+          
+          # The commit message to use
+          commit_message: 'chore(release): v${{ steps.changelog.outputs.version }}'
+          
+          # The body of the pull request, using the changelog output
+          body: |
+            Automated release PR for v${{ steps.changelog.outputs.version }}.
+            
+            ${{ steps.changelog.outputs.changelog }}
