@@ -6,19 +6,32 @@ on:
   pull_request:
     branches:
         - main
+    paths:
+      - '**.cs'
+      - '.github/workflows/unity-tests.yml'
 
 jobs:
   runTests:
     name: Run Runtime Tests
     runs-on: ubuntu-latest
+    env:
+      PROJECT_PATH: 'my-package'
+      UNITY_VERSION: '6000.2.8f1'
     
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-            path: my-package
-
-      # 2. Run the tests using GameCI's 'unity-tester' action
+            path: ${{ env.PROJECT_PATH }}
+            
+      - name: Cache Unity Library
+        uses: actions/cache@v4
+        with:
+          path: TempProject/Library
+          key: lib-${{ runner.os }}-${{ env.UNITY_VERSION }}-${{ hashFiles(format('{0}/**', env.PROJECT_PATH)) }}
+          restore-keys: |
+            lib-${{ runner.os }}-${{ env.UNITY_VERSION }}-
+      
       - name: Run Unity tests
         uses: game-ci/unity-test-runner@v4.3.1
         env:
@@ -27,9 +40,10 @@ jobs:
           UNITY_LICENSE: ${{secrets.UNITY_LICENSE}}
         with:
           packageMode: true
-          unityVersion: '6000.2.8f1'
-          projectPath: my-package
-
+          unityVersion: ${{ env.UNITY_VERSION }}
+          projectPath: ${{ env.PROJECT_PATH }}
+          coverageOptions: generateAdditionalMetrics;generateHtmlReport;generateBadgeReport;dontClear;assembliesToInclude=HealthSystem.Runtime,HealthSystem.Editor
+          
       - name: Upload test results
         uses: actions/upload-artifact@v4
         if: always() # 'always()' ensures this runs even if tests fail
