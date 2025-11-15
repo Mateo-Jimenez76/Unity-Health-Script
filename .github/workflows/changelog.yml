@@ -28,7 +28,6 @@ jobs:
           output-file: "CHANGELOG.md"
           preset: 'angular'
           git-push: 'false'
-          git-tag: 'false'
           
       - name: Create Pull Request
         # This step only runs if the changelog action created a new version
@@ -41,17 +40,9 @@ jobs:
           # The name of the new branch to create
           branch: 'changelog/release-v${{ steps.changelog.outputs.version }}'
           
+          head: ${{ github.ref }}
           # The branch to merge into
-          base_branch: 'main'
+          base: 'main'
           
           # The title of the pull request
           title: 'chore(release): v${{ steps.changelog.outputs.version }}'
-          
-          # The commit message to use
-          commit_message: 'chore(release): v${{ steps.changelog.outputs.version }}'
-          
-          # The body of the pull request, using the changelog output
-          body: |
-            Automated release PR for v${{ steps.changelog.outputs.version }}.
-            
-            ${{ steps.changelog.outputs.changelog }}
