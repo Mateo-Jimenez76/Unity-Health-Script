@@ -6,17 +6,10 @@ on:
   pull_request:
     branches:
         - main
-    paths:
-      - '**.cs'
-      - '.github/workflows/unity-tests.yml'
 
 jobs:
-  runTests:
-    name: Run Runtime Tests
+  checkChangedFiles:
     runs-on: ubuntu-latest
-    env:
-      PROJECT_PATH: 'my-package'
-      UNITY_VERSION: '6000.2.8f1'
     
     steps:
       - name: Checkout code
@@ -24,29 +17,56 @@ jobs:
         with:
             path: ${{ env.PROJECT_PATH }}
             
+      - name: Get all changed csharp files
+        id: changed-csharp-files
+        uses: tj-actions/changed-files@24d32ffd492484c1d75e0c0b894501ddb9d30d62
+        with:
+          files: |
+            **.cs
+            .github/workflows/unity-tests.yml
+            
+      - name: List all changed files
+        if: steps.changed-csharp-files.outputs.any_changed == 'true'
+        env:
+          ALL_CHANGED_FILES: ${{ steps.changed-markdown-files.outputs.all_changed_files }}
+        run: |
+          for file in ${ALL_CHANGED_FILES}; do
+            echo "$file was changed"
+          done
+
+  runTests:
+    name: Run Runtime Tests
+    runs-on: ubuntu-latest
+    needs: [checkChangedFiles]
+    if: steps.changed-csharp-files.outputs.any_changed == 'true'
+    env:
+      PROJECT_PATH: 'my-package'
+      UNITY_VERSION: '6000.2.8f1'
+      
+    steps:
       - name: Cache Unity Library
         uses: actions/cache@v4
         with:
-          path: TempProject/Library
-          key: lib-${{ runner.os }}-${{ env.UNITY_VERSION }}-${{ hashFiles(format('{0}/**', env.PROJECT_PATH)) }}
-          restore-keys: |
-            lib-${{ runner.os }}-${{ env.UNITY_VERSION }}-
-      
+            path: TempProject/Library
+            key: lib-${{ runner.os }}-${{ env.UNITY_VERSION }}-${{ hashFiles(format('{0}/**', env.PROJECT_PATH)) }}
+            restore-keys: |
+              lib-${{ runner.os }}-${{ env.UNITY_VERSION }}-
+        
       - name: Run Unity tests
         uses: game-ci/unity-test-runner@v4.3.1
         env:
-          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
-          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
-          UNITY_LICENSE: ${{secrets.UNITY_LICENSE}}
+            UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+            UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+            UNITY_LICENSE: ${{secrets.UNITY_LICENSE}}
         with:
-          packageMode: true
-          unityVersion: ${{ env.UNITY_VERSION }}
-          projectPath: ${{ env.PROJECT_PATH }}
-          coverageOptions: generateAdditionalMetrics;generateHtmlReport;generateBadgeReport;dontClear;assembliesToInclude=HealthSystem.Runtime,HealthSystem.Editor
-          
+            packageMode: true
+            unityVersion: ${{ env.UNITY_VERSION }}
+            projectPath: ${{ env.PROJECT_PATH }}
+            coverageOptions: generateAdditionalMetrics;generateHtmlReport;generateBadgeReport;dontClear;assembliesToInclude=HealthSystem.Runtime,HealthSystem.Editor
+            
       - name: Upload test results
         uses: actions/upload-artifact@v4
         if: always() # 'always()' ensures this runs even if tests fail
         with:
-          name: test-playmode-results
-          path: artifacts # game-ci/unity-tester outputs results to 'artifacts'
+            name: test-playmode-results
+            path: artifacts # game-ci/unity-tester outputs results to 'artifacts'
