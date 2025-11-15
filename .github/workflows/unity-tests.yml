@@ -15,8 +15,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        with:
-            path: ${{ env.PROJECT_PATH }}
             
       - name: Get all changed csharp files
         id: changed-csharp-files
@@ -45,6 +43,11 @@ jobs:
       UNITY_VERSION: '6000.2.8f1'
       
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+            path: ${{ env.PROJECT_PATH }}
+            
       - name: Cache Unity Library
         uses: actions/cache@v4
         with:
