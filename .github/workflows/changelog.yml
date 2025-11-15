@@ -28,7 +28,8 @@ jobs:
           output-file: "CHANGELOG.md"
           preset: 'angular'
           git-push: 'false'
-
+          git-tag: 'false'
+          
       - name: Create Pull Request
         # This step only runs if the changelog action created a new version
         if: steps.changelog.outputs.skipped == 'false'
