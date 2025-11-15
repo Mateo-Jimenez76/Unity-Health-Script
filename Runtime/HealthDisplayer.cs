@@ -78,19 +78,26 @@ public class HealthDisplayer : MonoBehaviour
         switch (displayType)
         {
             case DisplayType.Slider:
+                if(Slider == null)
+                {
+                    return;
+                }
                 Slider.value = Health.CurrentHealth;
                 return;
             case DisplayType.Text:
                 switch (textStyle)
                 {
                     case TextStyle.RawNumber:
-                        TextObject.text = Health.CurrentHealth.ToString();
+                        if (TextObject != null)
+                            TextObject.text = Health.CurrentHealth.ToString();
                         return;
                     case TextStyle.OutOf:
-                        TextObject.text = Health.CurrentHealth.ToString() + "/" + Health.MaxHealth.ToString();
+                        if (TextObject != null)
+                            TextObject.text = Health.CurrentHealth.ToString() + "/" + Health.MaxHealth.ToString();
                         return;
                     case TextStyle.Percentage:
-                        TextObject.text = (Health.CurrentHealth / Health.MaxHealth).ToString() + "%";
+                        if (TextObject != null)
+                            TextObject.text = (Health.CurrentHealth / Health.MaxHealth).ToString() + "%";
                         return;
                     case TextStyle.Custom:
                         MaxHealthTextObject.text = Health.MaxHealth.ToString();
