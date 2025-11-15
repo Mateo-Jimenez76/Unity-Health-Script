@@ -32,10 +32,10 @@ jobs:
       - name: Create Pull Request
         # This step only runs if the changelog action created a new version
         if: steps.changelog.outputs.skipped == 'false'
-        uses: auto-pr/easy-pull-request@v1
+        uses: misha-brt/create-pull-request@v0.0.1
         with:
 
-          token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           
           # The name of the new branch to create
           branch: 'changelog/release-v${{ steps.changelog.outputs.version }}'
