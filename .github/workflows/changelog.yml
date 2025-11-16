@@ -39,3 +39,5 @@ jobs:
           body: 'Changelog update created by TriPSs/conventional-changelog-action@v5'
 
           base: main
+
+          draft: always-true
