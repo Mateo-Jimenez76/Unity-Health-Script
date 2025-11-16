@@ -41,3 +41,5 @@ jobs:
           base: main
 
           draft: always-true
+
+          token: ${{secrets.CHANGELOG_TOKEN}}
