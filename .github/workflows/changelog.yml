@@ -30,19 +30,12 @@ jobs:
           git-push: 'false'
           
       - name: Create Pull Request
-        # This step only runs if the changelog action created a new version
         if: steps.changelog.outputs.skipped == 'false'
-        uses: misha-brt/create-pull-request@v0.0.1
+        uses: peter-evans/create-pull-request@v7
         with:
 
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          
-          # The name of the new branch to create
-          branch: 'changelog/release-v${{ steps.changelog.outputs.version }}'
-          
-          head: ${{ github.ref }}
-          # The branch to merge into
-          base: 'main'
-          
-          # The title of the pull request
-          title: 'chore(release): v${{ steps.changelog.outputs.version }}'
+          title: 'Automated Changelog Pull Request (request made by peter-evans/create-pull-request@v7)'
+
+          body: 'Changelog update created by TriPSs/conventional-changelog-action@v5'
+
+          base: main
