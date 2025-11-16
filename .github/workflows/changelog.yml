@@ -24,7 +24,7 @@ jobs:
         id: changelog
         uses: TriPSs/conventional-changelog-action@v5
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{secrets.CHANGELOG_TOKEN}}
           output-file: "CHANGELOG.md"
           preset: 'angular'
           git-push: 'false'
