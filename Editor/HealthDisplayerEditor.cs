@@ -12,7 +12,7 @@ public class HealthDisplayerEditor : Editor
     SerializedProperty backgroundColor;
     SerializedProperty fillColor;
     SerializedProperty textStyleProp;
-    private void Awake()
+    private void OnEnable()
     {
         healthDisplayer = (HealthDisplayer)target;
         // Get references
@@ -37,20 +37,23 @@ public class HealthDisplayerEditor : Editor
         EditorGUILayout.PropertyField(displayTypeProp);
     
         // Show slider settings if displayType is Slider
-        if (displayTypeProp.enumValueIndex == 0) // Slider
+        if (displayTypeProp.enumValueIndex == 0)
         {
             EditorGUILayout.LabelField("Slider Settings", EditorStyles.boldLabel);
-            
-            EditorGUILayout.PropertyField(slider);
             
             EditorGUILayout.PropertyField(backgroundColor);
             
             EditorGUILayout.PropertyField(fillColor);
-            
+
+            if (slider.objectReferenceValue == null)
+            {
+                EditorGUILayout.HelpBox("A Slider component is missing.", MessageType.Warning);
+            }
+            EditorGUILayout.PropertyField(slider);
         }
 
         // Show text settings if displayType is Text
-        if (displayTypeProp.enumValueIndex == 1) // Text
+        if (displayTypeProp.enumValueIndex == 1)
         {
             EditorGUILayout.LabelField("Text Settings", EditorStyles.boldLabel);
             
@@ -66,7 +69,7 @@ public class HealthDisplayerEditor : Editor
             {
                 if (textObject.objectReferenceValue == null)
                 {
-                    EditorGUILayout.HelpBox("A TextMeshProUGUI component is required in order to provide real time display updates.", MessageType.Warning);
+                    EditorGUILayout.HelpBox("A TextMeshProUGUI component is missing", MessageType.Warning);
                 }
                 EditorGUILayout.PropertyField(textObject);
             }
