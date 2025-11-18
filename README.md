@@ -7,6 +7,8 @@ To deal damage call the `Damage(int amount)` function. When damage is taken all 
 >[!NOTE]
 >OnDeath is invoked AFTER OnDamage and not instead of.
 
+Implimentation at [Health.cs Line 39](Runtime/Health.cs)
+
 ### Healing
 To heal call the `Heal(int amount)` function. This function will invoke all events in the `OnHealth UnityEvent`.
 ### Subscribing / Unsubscribing From Events
