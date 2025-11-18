@@ -3,10 +3,11 @@ permissions:
   contents: read
 
 on:
+  workflow_dispatch:
   pull_request:
     branches:
         - main
-    types: [ready_for_review,opened,reopened,auto_merge_enabled]
+    types: [ready_for_review,opened,reopened,auto_merge_enabled,review_requested]
 
 jobs:
   checkChangedFiles:
@@ -53,7 +54,7 @@ jobs:
         uses: actions/cache@v4
         with:
             path: TempProject/Library
-            key: lib-${{ runner.os }}-${{ env.UNITY_VERSION }}-${{ hashFiles(format('{0}/**', env.PROJECT_PATH)) }}
+            key: lib-${{ runner.os }}-${{ env.UNITY_VERSION }}-${{ hashFiles(format('{0}/package.json', env.PROJECT_PATH)) }}
             restore-keys: |
               lib-${{ runner.os }}-${{ env.UNITY_VERSION }}-
         
