@@ -54,7 +54,7 @@ jobs:
         uses: actions/cache@v4
         with:
             path: TempProject/Library
-            key: lib-${{ runner.os }}-${{ env.UNITY_VERSION }}-${{ hashFiles(format('{0}/**', env.PROJECT_PATH)) }}
+            key: lib-${{ runner.os }}-${{ env.UNITY_VERSION }}-${{ hashFiles(format('{0}/package.json', env.PROJECT_PATH)) }}
             restore-keys: |
               lib-${{ runner.os }}-${{ env.UNITY_VERSION }}-
         
