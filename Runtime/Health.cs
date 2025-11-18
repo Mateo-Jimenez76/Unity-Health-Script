@@ -84,6 +84,11 @@ public class Health : MonoBehaviour
         return true;
     }
 
+    public void BeInvulnerable(bool value)
+    {
+        _invulnerable = value;
+    }
+
     public void SubscribeToOnDeath(UnityAction action)
     {
         _onDeath.AddListener(action);
