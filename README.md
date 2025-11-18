@@ -32,7 +32,7 @@ A reference to a `Slider` is required
 <img width="520" height="151" alt="image" src="https://github.com/user-attachments/assets/28df8acc-e54f-4dd7-aa5c-4596e72a1d04" />
 
 ### Prerequisites
-A `TextMeshProUGUI` is required as a refenced to display the text. While displaying as a number there are several formats to chose from which go as follows.
+A `TextMeshProUGUI` is required. While displaying as a number there are several formats to chose from which go as follows.
 
 ### Number Display Options
 
