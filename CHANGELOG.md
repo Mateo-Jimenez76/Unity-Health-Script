@@ -1,4 +1,4 @@
-## [1.1.7](https://github.com/Mateo-Jimenez76/Unity-Health-Script/compare/v1.1.6...v1.1.7) (2025-11-18)
+# [1.2.0](https://github.com/Mateo-Jimenez76/Unity-Health-Script/compare/v1.1.6...v1.2.0) (2025-11-18)
 
 
 ### Bug Fixes
@@ -6,6 +6,11 @@
 * added initial display update on Start ([746bb89](https://github.com/Mateo-Jimenez76/Unity-Health-Script/commit/746bb896828aaa1a4e10f341cc16e25fbd8a42e5))
 * Added null checks and removed Tests for HealthDisplayer ([8d86e96](https://github.com/Mateo-Jimenez76/Unity-Health-Script/commit/8d86e969ff0000158afb24e8ddefc5250b511caa))
 * Fixed null refence exceptions upon displaying the custom inspector ([495cf00](https://github.com/Mateo-Jimenez76/Unity-Health-Script/commit/495cf00d26d77e471555ec3c4d3cae1abf15bb79))
+
+
+### Features
+
+* Added function to control invulnerability ([7c4a485](https://github.com/Mateo-Jimenez76/Unity-Health-Script/commit/7c4a485ff2cac2566eaea5bac2330156a641848d))
 
 
 
