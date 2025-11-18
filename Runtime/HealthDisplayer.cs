@@ -114,13 +114,13 @@ public class HealthDisplayer : MonoBehaviour
         Health.SubscribeToOnHeal(() => UpdateHealthDisplayRuntime());
     }
 
-    public enum DisplayType
+    private enum DisplayType
     {
         Slider,
         Text,
     }
 
-    public enum TextStyle
+    private enum TextStyle
     {
         //5
         RawNumber,
