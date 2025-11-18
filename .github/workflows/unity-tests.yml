@@ -3,10 +3,11 @@ permissions:
   contents: read
 
 on:
+  workflow_dispatch:
   pull_request:
     branches:
         - main
-    types: [ready_for_review,opened,reopened,auto_merge_enabled]
+    types: [ready_for_review,opened,reopened,auto_merge_enabled,review_requested]
 
 jobs:
   checkChangedFiles:
