@@ -4,13 +4,15 @@
 ## How To Use
 ### Dealing Damage
 To deal damage call the `Damage(int amount)` function. When damage is taken all events in the `OnDamage` UnityEvent will be invoked and if health is <= 0 then `OnDeath` will be invoked aswell. 
->[!NOTE]
+>[!IMPORTANT]
 >OnDeath is invoked AFTER OnDamage and not instead of.
 
-Implimentation at [Health.cs Line 39](Runtime/Health.cs)
+Implimentation in [Health.cs/Damage(int amount)](https://github.com/Mateo-Jimenez76/Unity-Health-Script/blob/a4a69911970ceddeb410e8de71320b76d3fd5b3a/Runtime/Health.cs#L39-L60)
 
 ### Healing
-To heal call the `Heal(int amount)` function. This function will invoke all events in the `OnHealth UnityEvent`.
+To heal call the `Heal(int amount)` function. This function will also invoke all events in the `OnHealth` UnityEvent.
+
+Implimentation in [Health.cs/Heal(int amount)](https://github.com/Mateo-Jimenez76/Unity-Health-Script/blob/a4a69911970ceddeb410e8de71320b76d3fd5b3a/Runtime/Health.cs#L61-L85)
 ### Subscribing / Unsubscribing From Events
 If you would like to subscribe to the events through scripts you can call `SubscribeTo...(UnityAction action)` followed by the name of the corresponding Unity Event. Ex: `SubscribeToOnDeath(UnityAction action)`. To unsubscribe is the same process but instead you call `UnsubscribeFrom...(UnityAction action)` with the UnityAction you wish to remove from the Event.
 
