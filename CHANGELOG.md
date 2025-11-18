@@ -1,3 +1,14 @@
+## [1.1.7](https://github.com/Mateo-Jimenez76/Unity-Health-Script/compare/v1.1.6...v1.1.7) (2025-11-18)
+
+
+### Bug Fixes
+
+* added initial display update on Start ([746bb89](https://github.com/Mateo-Jimenez76/Unity-Health-Script/commit/746bb896828aaa1a4e10f341cc16e25fbd8a42e5))
+* Added null checks and removed Tests for HealthDisplayer ([8d86e96](https://github.com/Mateo-Jimenez76/Unity-Health-Script/commit/8d86e969ff0000158afb24e8ddefc5250b511caa))
+* Fixed null refence exceptions upon displaying the custom inspector ([495cf00](https://github.com/Mateo-Jimenez76/Unity-Health-Script/commit/495cf00d26d77e471555ec3c4d3cae1abf15bb79))
+
+
+
 ## [1.1.6](https://github.com/Mateo-Jimenez76/Unity-Health-Script/compare/v1.1.5...v1.1.6) (2025-10-31)
 
 
@@ -32,16 +43,6 @@
 
 * Corrected bad syntax ([cf8e8e8](https://github.com/Mateo-Jimenez76/Unity-Health-Script/commit/cf8e8e8bc29aa369df80a9d39752aa875176f873))
 * Improved Assembly Definitions names ([fe8dce1](https://github.com/Mateo-Jimenez76/Unity-Health-Script/commit/fe8dce11167859fd0346cf3c2f3398a4f72d2b34))
-
-
-
-## [1.1.2](https://github.com/Mateo-Jimenez76/Unity-Health-Script/compare/v1.1.1...v1.1.2) (2025-10-23)
-
-
-### Bug Fixes
-
-* Added missing meta files ([5482ce9](https://github.com/Mateo-Jimenez76/Unity-Health-Script/commit/5482ce99920ecf418c4ab5c6e81de287856f39c5))
-* Removed duplicate start() from HealthDisplayer.cs ([a0d26bf](https://github.com/Mateo-Jimenez76/Unity-Health-Script/commit/a0d26bf14c433c00140879b9f54f5306c36bb718))
 
 
 
