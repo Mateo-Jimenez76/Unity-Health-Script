@@ -5,8 +5,6 @@
   "description": "Health and display system.",
   "unity": "6000.0",
   "unityRelease": "6f2",
-  "documentationUrl": "https://example.com/",
-  "licensesUrl": "https://mit-license.org/",
   "dependencies": {
     "com.unity.ugui": "2.0.0"
   },
@@ -15,7 +13,7 @@
     "Health System"
   ],
   "author": {
-    "name": "Max Greenhill",
-    "url": "https://github.com/MaxGreenhill8529"
+    "name": "Mateo Jimenez Jones",
+    "url": "https://github.com/Mateo-Jimenez76"
   }
 }
