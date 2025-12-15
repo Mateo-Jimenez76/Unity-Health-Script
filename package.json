@@ -5,6 +5,7 @@
   "description": "Health and display system.",
   "unity": "6000.0",
   "unityRelease": "6f2",
+  "changelogUrl": "CHANGELOG.md",
   "dependencies": {
     "com.unity.ugui": "2.0.0"
   },
