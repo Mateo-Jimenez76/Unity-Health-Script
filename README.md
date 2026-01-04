@@ -6,6 +6,8 @@
 To deal damage call the `Damage(int amount)` function. When damage is taken all events in the `OnDamage` UnityEvent will be invoked and if health is <= 0 then `OnDeath` will be invoked aswell. 
 >[!IMPORTANT]
 >OnDeath is invoked AFTER OnDamage and not instead of.
+There is also an option to negate all damage via `bool BeInvulnerable(bool value)`.
+
 
 Implimentation in [Health.cs/Damage(int amount)](https://github.com/Mateo-Jimenez76/Unity-Health-Script/blob/a4a69911970ceddeb410e8de71320b76d3fd5b3a/Runtime/Health.cs#L39-L60)
 
@@ -20,7 +22,7 @@ If you would like to subscribe to the events through scripts you can call `Subsc
 
 ### Prerequisites
 A Health script is required to be on the same object as the HealthDisplayer.
-If one is not already on it then one will be created for you due to the effect of `[RequireComponent(typeof(Health))]`\
+If one is not already on it then one will be created for you due to the effect of `[RequireComponent(typeof(Health))]`
 
 ### Displaying As A Bar
 <img width="499" height="140" alt="image" src="https://github.com/user-attachments/assets/50f02f87-70bc-48e8-8a6f-4ed7ad7a1035" />
