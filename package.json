@@ -1,7 +1,7 @@
 {
   "name": "com.maxgreenhill.healthsystem",
   "version": "1.1.7",
-  "displayName": "Health System",
+  "displayName": "Simple Health System",
   "description": "Health and display system.",
   "unity": "6000.0",
   "unityRelease": "6f2",
