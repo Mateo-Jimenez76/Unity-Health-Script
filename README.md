@@ -6,6 +6,7 @@
 To deal damage call the `Damage(int amount)` function. When damage is taken all events in the `OnDamage` UnityEvent will be invoked and if health is <= 0 then `OnDeath` will be invoked aswell. 
 >[!IMPORTANT]
 >OnDeath is invoked AFTER OnDamage and not instead of.
+
 There is also an option to negate all damage via `bool BeInvulnerable(bool value)`.
 
 
