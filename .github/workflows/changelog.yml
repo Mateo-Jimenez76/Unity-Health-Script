@@ -5,12 +5,14 @@ on:
     branches:
       - "main"
       - "master"
+    paths-ignore:
+      - "**.md"
+      - "/.github"
 
 jobs:
   build:
     permissions:
       contents: write
-      pull-requests: write
       
     runs-on: ubuntu-latest
 
@@ -21,25 +23,8 @@ jobs:
           fetch-depth: 0
 
       - name: Generate Changelog
-        id: changelog
-        uses: TriPSs/conventional-changelog-action@v5
+        uses: TriPSs/conventional-changelog-action@v6.2.0
         with:
           github-token: ${{secrets.CHANGELOG_TOKEN}}
           output-file: "CHANGELOG.md"
           preset: 'angular'
-          git-push: 'false'
-          
-      - name: Create Pull Request
-        if: steps.changelog.outputs.skipped == 'false'
-        uses: peter-evans/create-pull-request@v7
-        with:
-
-          title: 'Automated Changelog Pull Request (request made by peter-evans/create-pull-request@v7)'
-
-          body: 'Changelog update created by TriPSs/conventional-changelog-action@v5'
-
-          base: main
-
-          draft: always-true
-
-          token: ${{secrets.CHANGELOG_TOKEN}}
