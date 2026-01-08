@@ -1,4 +1,4 @@
-# [2.0.0](https://github.com/Mateo-Jimenez76/Unity-Simple-Health-Package/compare/v1.1.6...v2.0.0) (2026-01-08)
+# [3.0.0](https://github.com/Mateo-Jimenez76/Unity-Simple-Health-Package/compare/v1.1.6...v3.0.0) (2026-01-08)
 
 
 ### Bug Fixes
