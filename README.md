@@ -1,7 +1,8 @@
-# Unity-Health-Script
-![Health Inspector](https://github.com/user-attachments/assets/a9bbea22-ccdf-4fc2-8076-bb7f94dc24b6)
+# Simple Health Package
+
 
 ## How To Use
+![Health Inspector](https://github.com/user-attachments/assets/a9bbea22-ccdf-4fc2-8076-bb7f94dc24b6)
 ### Dealing Damage
 To deal damage call the `Damage(int amount)` function. When damage is taken all events in the `OnDamage` UnityEvent will be invoked and if health is <= 0 then `OnDeath` will be invoked aswell. 
 >[!IMPORTANT]
